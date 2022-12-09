@@ -3,8 +3,9 @@ import javax.swing.*;
 public class GameFrame extends JFrame{
 
     // constructor
-    GameFrame(){
-        this.add(new GamePanel());
+    GameFrame(int a)
+    {
+        this.add(new GamePanel(a));
         this.setTitle("Snake");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -15,3 +16,6 @@ public class GameFrame extends JFrame{
         this.setVisible(true);
     }
 }
+
+
+
