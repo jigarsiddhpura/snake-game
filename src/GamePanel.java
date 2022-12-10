@@ -8,7 +8,7 @@ import java.awt.Dimension;
 public class GamePanel extends JPanel implements ActionListener{
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
-    static final int UNIT_SIZE = 30;
+    static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_HEIGHT*SCREEN_WIDTH)/UNIT_SIZE;
     static final int DELAY = 100;
     final int x[] = new int[GAME_UNITS];//this array will carry the x co-od of snake body 
@@ -22,18 +22,18 @@ public class GamePanel extends JPanel implements ActionListener{
     Timer timer ;
     Random random; 
 
-    GamePanel(){
+    GamePanel(int a){
         random = new Random();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));//background size
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
-        startGame();
+        startGame(a);
     }
 
-    public void startGame(){
+    public void startGame(int a){
         newApple();
         running = true;
-        timer = new Timer(DELAY, this);
+        timer = new Timer(a, this);
         timer.start();
     }
     public void paintComponent(Graphics g){
@@ -124,13 +124,13 @@ public class GamePanel extends JPanel implements ActionListener{
         if(x[0] < 0)
         {running = false;}
         //checks if head touch right border
-        if(x[0] > SCREEN_WIDTH)
+        if(x[0] > SCREEN_WIDTH-25)
         {running = false;}
         //checks if head touch up border
         if(y[0] < 0)
         {running = false;}
         //checks if head touch bottom border
-        if(y[0] > SCREEN_HEIGHT)
+        if(y[0] > SCREEN_HEIGHT-25)
         {running = false;}
         if(running == false)
         {timer.stop();}
@@ -143,7 +143,7 @@ public class GamePanel extends JPanel implements ActionListener{
         g.drawString("Score : "+Integer.toString(applesEaten), SCREEN_WIDTH/4, SCREEN_HEIGHT/4);
     }
 
-    @Override
+    
     public void actionPerformed(ActionEvent e){
         if(running)
         {
@@ -155,7 +155,7 @@ public class GamePanel extends JPanel implements ActionListener{
     }
 
     public class MyKeyAdapter extends KeyAdapter{
-        @Override
+       
         public void keyPressed(KeyEvent e)
         {
             switch(e.getKeyCode())
